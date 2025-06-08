@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Адмін-панель</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin-panel">
+    <h2>Додати новий товар</h2>
+    <form id="productForm">
+      <input type="text" id="productName" placeholder="Назва товару" required>
+      <textarea id="productDesc" placeholder="Опис товару" required></textarea>
+      <input type="number" id="productPrice" placeholder="Ціна (грн)" required>
+      
+      <label for="productImage" class="image-upload">📷 Додати фото</label>
+      <input type="file" id="productImage" accept="image/*" style="display: none;" required>
+      
+      <button type="submit">Зберегти товар</button>
+    </form>
+    <p id="success" style="color: green;"></p>
+  </div>
+
+  <script>
+    document.getElementById("productForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("productName").value;
+      const desc = document.getElementById("productDesc").value;
+      const price = document.getElementById("productPrice").value;
+      const image = document.getElementById("productImage").files[0];
+
+      if (!image) {
+        alert("Будь ласка, виберіть фото товару.");
+        return;
+      }
+
+      // Тут можна реалізувати збереження у JSON або локальне сховище
+      document.getElementById("success").innerText = "Товар успішно додано!";
+      document.getElementById("productForm").reset();
+    });
+
+    document.querySelector(".image-upload").addEventListener("click", function() {
+      document.getElementById("productImage").click();
+    });
+  </script>
+</body>
+</html>
