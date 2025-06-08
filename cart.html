@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кошик | Ocean Sea Food</title>
+  <style>
+    body {
+      background-color: #1a1a2e;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    header {
+      background-color: #16213e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    .brand-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .brand-main {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00a8cc;
+    }
+    .brand-sub {
+      font-size: 16px;
+      color: #cccccc;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+    .site-slogan {
+      font-size: 16px;
+      color: #cccccc;
+      margin-left: 30px;
+      font-style: italic;
+      font-weight: 300;
+      white-space: nowrap;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    nav a {
+      color: #00a8cc;
+      text-decoration: none;
+      margin-left: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .telegram-link {
+      background-color: #0088cc;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 16px;
+      margin-left: 10px;
+      margin-top: 10px;
+    }
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .site-slogan {
+        margin-top: 10px;
+        margin-left: 0;
+        font-size: 14px;
+        white-space: normal;
+      }
+      header, nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .telegram-link, nav a {
+        margin-left: 0;
+      }
+    }
+  
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #00a8cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #007fa3;
+    }
+    @media (max-width: 600px) {
+      .site-slogan {
+        font-size: 14px;
+        white-space: normal;
+        margin-left: 0;
+        margin-top: 10px;
+      }
+      header, nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav a, .telegram-link {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+      input[type="text"], button {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="Дизайн без названия.png" alt="Логотип" class="logo">
+      <div class="brand-name">
+        <div class="brand-main">Ocean</div>
+        <div class="brand-sub">Sea Food</div>
+      </div>
+      <div class="site-slogan">
+        Свіжі морепродукти з доставкою по Україні
+      </div>
+    </div>
+    <nav>
+      <a href="cart.html">Головна</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="cart.html">Кошик</a>
+      <a class="telegram-link" href="https://t.me/Anastasiia_Kharchenkoo" target="_blank">📩 Telegram для зв'язку</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Ваш кошик</h1>
+    <div id="cart-container"></div>
+    <div id="total-price" style="margin: 20px 0; font-size: 18px;"></div>
+    <div id="order-form" style="display:none;">
+      <h3>Оформити замовлення</h3>
+      <input type="text" id="customer-name" placeholder="Ваше ім’я" required>
+      <input type="text" id="customer-phone" placeholder="Номер телефону" required>
+      <button onclick="sendOrder()">Відправити в Telegram</button>
+    </div>
+    <script>
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartContainer = document.getElementById('cart-container');
+      const totalPriceElem = document.getElementById('total-price');
+      const orderForm = document.getElementById('order-form');
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<p>Кошик порожній.</p>';
+      } else {
+        let total = 0;
+        cart.forEach((item, i) => {
+          const div = document.createElement('div');
+          const sum = item.price * item.qty;
+          total += sum;
+          div.innerHTML = `<p>${item.name} — ${item.qty} шт — ${sum} грн</p>`;
+          cartContainer.appendChild(div);
+        });
+        totalPriceElem.textContent = `Сума замовлення: ${total} грн`;
+        orderForm.style.display = 'block';
+      }
+
+      function sendOrder() {
+        const name = document.getElementById('customer-name').value.trim();
+        const phone = document.getElementById('customer-phone').value.trim();
+        if (!name || !phone) {
+          alert("Заповніть ім’я та телефон");
+          return;
+        }
+        let text = `Замовлення від: ${name}%0AТелефон: ${phone}%0A`;
+        cart.forEach(item => {
+          text += `${item.name} — ${item.qty} шт — ${item.price * item.qty} грн%0A`;
+        });
+        text += totalPriceElem.textContent;
+        window.open(`https://t.me/share/url?url=&text=${text}`, '_blank');
+      }
+    </script>
+  
+  </main>
+
+  <footer style="
+    background-color: #16213e;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+  ">
+    <p>Слідкуй за нами:</p>
+    <a href="https://www.instagram.com/ocean.seafood_?igsh=MTRpZ2J2bnV2MThyZQ==" target="_blank" style="color: #f0f0f0; margin: 0 10px;">📸 Instagram</a>
+    <a href="https://www.tiktok.com/@ocean.seafood_" target="_blank" style="color: #f0f0f0; margin: 0 10px;">🎵 TikTok</a>
+    <p style="margin-top: 10px; font-size: 14px;">&copy; 2025 Ocean Sea Food</p>
+  </footer>
+
+
+</body>
+</html>
