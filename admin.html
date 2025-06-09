@@ -1,8 +1,12 @@
 
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
   <link rel="icon" href="rounded_favicon.ico" type="image/x-icon">
+<!DOCTYPE html>
+<html lang="uk">
+<head>
   <meta charset="UTF-8">
   <title>Адмінка | Ocean Sea Food</title>
   <style>
@@ -204,3 +208,209 @@
     🎵 TikTok
   </a>
   <p style="margin-top: 10px; font-size: 14px;">&copy; 2025 Ocean Sea Food</p>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Адмінка | Ocean Sea Food</title>
+  <style>
+    body {
+      background-color: #1a1a2e;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    header {
+      background-color: #16213e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    .brand-name {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1;
+    }
+
+    .brand-main {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00a8cc;
+    }
+
+    .brand-sub {
+      font-size: 16px;
+      color: #cccccc;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: #00a8cc;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 18px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .telegram-link {
+      background-color: #0088cc;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 16px;
+      margin-left: 20px;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00a8cc;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background-color: #0f3460;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      background-color: #00a8cc;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #007fa3;
+    }
+  </style>
+</head>
+<footer style="
+  background-color: #16213e;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+">
+
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="Дизайн без названия.png" alt="Логотип" class="logo">
+      <div class="brand-name">
+        <div class="brand-main">Ocean</div>
+        <div class="brand-sub">Sea Food</div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Головна</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="cart.html">Кошик</a>
+      <a class="telegram-link" href="https://t.me/Anastasiia_Kharchenkoo" target="_blank">📩 Telegram для зв'язку</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Адмін панель</h1>
+    <form onsubmit="saveProduct(event)">
+      <label for="name">Назва товару:</label>
+      <input type="text" id="name" required>
+
+      <label for="price">Ціна:</label>
+      <input type="number" id="price" required>
+
+      <label for="image">Посилання на фото:</label>
+      <input type="text" id="image" required>
+
+      <button type="submit">Додати товар</button>
+    </form>
+  </main>
+
+  <script>
+    function saveProduct(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const price = document.getElementById('price').value;
+      const image = document.getElementById('image').value;
+
+      const newProduct = { name, price, image };
+      let products = JSON.parse(localStorage.getItem('products')) || [];
+      products.push(newProduct);
+      localStorage.setItem('products', JSON.stringify(products));
+
+      alert("Товар додано!");
+      event.target.reset();
+    }
+  </script>
+
+</body>
+</html>
+<footer style="
+  background-color: #16213e;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+">
+  <p>Слідкуй за нами:</p>
+  <a href="https://www.instagram.com/ocean.seafood_?igsh=MTRpZ2J2bnV2MThyZQ==" target="_blank" style="color: #f0f0f0; margin: 0 10px;">
+    📸 Instagram
+  </a>
+  <a href="https://www.tiktok.com/@ocean.seafood_" target="_blank" style="color: #f0f0f0; margin: 0 10px;">
+    🎵 TikTok
+  </a>
+  <p style="margin-top: 10px; font-size: 14px;">&copy; 2025 Ocean Sea Food</p>
+</footer>
+
